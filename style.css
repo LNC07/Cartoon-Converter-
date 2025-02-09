@@ -11,3 +11,11 @@ button {
     border: none;
     cursor: pointer;
 }
+#progressContainer {
+    margin-top: 20px;
+    display: none;
+}
+progress {
+    width: 80%;
+    height: 20px;
+}
