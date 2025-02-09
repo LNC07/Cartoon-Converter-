@@ -11,12 +11,18 @@
     
     <input type="file" id="videoInput" accept="video/*">
     <button id="convertBtn">🎬 Convert to Animation</button>
-    
+
     <h3>📽️ Original Video:</h3>
     <video id="originalVideo" controls></video>
 
     <h3>🎞️ Animated Video:</h3>
     <video id="animatedVideo" controls></video>
+
+    <div id="progressContainer">
+        <p>Conversion Progress: <span id="progressText">0%</span></p>
+        <progress id="progressBar" value="0" max="100"></progress>
+        <p>Estimated Time: <span id="timeLeft">Calculating...</span></p>
+    </div>
 
     <script src="script.js"></script>
 </body>
