@@ -7,11 +7,31 @@ document.getElementById("videoInput").addEventListener("change", function(event)
 });
 
 document.getElementById("convertBtn").addEventListener("click", async function() {
-    alert("🚀 Converting video to animation... Please wait!");
+    alert("🚀 Conversion Started! Please wait...");
     
+    document.getElementById("progressContainer").style.display = "block";
+    let progressBar = document.getElementById("progressBar");
+    let progressText = document.getElementById("progressText");
+    let timeLeft = document.getElementById("timeLeft");
+
+    progressBar.value = 0;
+    progressText.innerText = "0%";
+    timeLeft.innerText = "Calculating...";
+
     // FFmpeg WASM Load
     const { createFFmpeg } = FFmpeg;
     const ffmpeg = createFFmpeg({ log: true });
+
+    // Progress Function
+    ffmpeg.setProgress(({ ratio }) => {
+        let percent = Math.round(ratio * 100);
+        progressBar.value = percent;
+        progressText.innerText = percent + "%";
+
+        let estimatedTime = ((100 - percent) / 5).toFixed(1); // Estimate 5% per second
+        timeLeft.innerText = estimatedTime + "s left";
+    });
+
     await ffmpeg.load();
 
     // Input Video
